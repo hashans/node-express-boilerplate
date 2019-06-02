@@ -2,6 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import * as constants from './utils/constants';
 import cors from 'cors';
+import container from './config/configIoc';
 
 let app = express();
 
@@ -11,9 +12,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors());
 
 // Base router
-app.get('/', function (req, res, next) {
-    res.json({msg: 'Hello World!'});
-});
+app.use('/', container.resolve('router'));
 
 // catch 404 and forward to error handler
 app.use( (req, res, next) => {
