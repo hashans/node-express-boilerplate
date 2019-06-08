@@ -16,10 +16,16 @@
     "@babel/core": "^7.4.5",
     "@babel/preset-env": "^7.4.5",
     "awilix": "^4.2.2",
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
-    "mongoose": "^5.5.12"
+    "jsonwebtoken": "^8.5.1",
+    "moment": "^2.24.0",
+    "mongoose": "^5.5.12",
+    "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0",
+    "q": "^1.5.1"
   },
   "devDependencies": {
     "dotenv": "^8.0.0"

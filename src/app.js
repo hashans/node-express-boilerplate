@@ -25,10 +25,14 @@ app.use( (req, res, next) => {
 app.use((err, req, res, next) => {
     res.locals.message = err.message;
     res.status(err.status || constants.INTERNAL_ERROR);
-    res.json({
+    let response = {
         code: err.name,
         error: err.message
-    });
+    };
+    if(process.env.MODE === 'dev'){
+        response.stack = err.stack;
+    }
+    res.json(response);
     return next();
 });
 
