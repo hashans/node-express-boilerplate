@@ -1,44 +1,45 @@
-import moment from "../../config/configIoc";
+let self;
 
 export default class BaseRepository {
 
   constructor(mongoose, q, moment, collection) {
-    this.mongoose = mongoose;
-    this.q = q;
-    this.collection = collection;
-    this.moment = moment;
+    self = this;
+    self.mongoose = mongoose;
+    self.q = q;
+    self.collection = collection;
+    self.moment = moment;
 
   }
 
 
   _insert (object, schema) {
-    let model = this.mongoose.model(this.collection, schema);
-    object.createdAt = this.moment.utc().format();
+    let model = self.mongoose.model(self.collection, schema);
+    object.createdAt = self.moment.utc().format();
 
     let objectModel = new model(object);
 
     return objectModel.save()
       .then(result=> {
-        return this.q.when(result);
+        return self.q.when(result);
       })
   }
 
 
   _find (query, schema) {
-    let model = this.mongoose.model(this.collection, schema);
+    let model = self.mongoose.model(self.collection, schema);
 
     return model.find(query)
       .then(result=> {
-        return this.q.when(result);
+        return self.q.when(result);
       })
   }
 
   _findOne (query, schema) {
-    let model = this.mongoose.model(this.collection, schema);
+    let model = self.mongoose.model(self.collection, schema);
 
     return model.findOne(query)
       .then(result=> {
-        return this.q.when(result);
+        return self.q.when(result);
       })
   }
 
